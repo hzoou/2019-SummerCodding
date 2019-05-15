@@ -1,5 +1,6 @@
 package com.pjt.web.summercoding.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +26,8 @@ public class TodoListApiController {
 	TodoListService todoListService;
 	
 	@GetMapping
-	public Map<String, Object> list() {
-		
+	public Map<String, Object> list() throws Exception {
+		System.out.println("*** TodoListApiController:list()");
 		List<TodoList> todoList = todoListService.getTodoLists();
 		List<TodoList> doneList = todoListService.getDoneLists();
 		
@@ -37,7 +40,8 @@ public class TodoListApiController {
 	
 	@PostMapping
 	public TodoList register(@RequestBody TodoList todoList,
-							HttpServletRequest request) {
+							HttpServletRequest request) throws Exception {
+		System.out.println("*** TodoListApiController:register");
 		TodoList resultTodoList = todoListService.addTodoList(todoList);
 		return resultTodoList;
 	}

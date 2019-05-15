@@ -1,6 +1,8 @@
 package com.pjt.web.summercoding.dao;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -23,6 +25,7 @@ public class TodoListDao {
 	private RowMapper<TodoList> rowMapper = BeanPropertyRowMapper.newInstance(TodoList.class);
 	
 	public TodoListDao(DataSource dataSource) {
+		System.out.println("*** TodoListDao:TodoListDao");
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
                 .withTableName("todo")
@@ -30,15 +33,24 @@ public class TodoListDao {
 	}
 	
 	public List<TodoList> selectTodo() {
+		System.out.println("*** TodoListDao:selectTodo()");
 		return jdbc.query(SELECT_TODO, rowMapper);
 	}
 	
 	public List<TodoList> selectDone() {
+		System.out.println("*** TodoListDao:selectDone()");
 		return jdbc.query(SELECT_DONE, rowMapper);
 	}
 	
 	public Long insert(TodoList todoList) {
+		System.out.println("*** TodoListDao:insert()");
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todoList);
 		return insertAction.executeAndReturnKey(params).longValue();
+	}
+	
+	public int remove(Long id) {
+		System.out.println("*** TodoListDao:remove()");
+		Map<String, ?> params = Collections.singletonMap("id", id);
+		return jdbc.update(REMOVE, params);
 	}
 }

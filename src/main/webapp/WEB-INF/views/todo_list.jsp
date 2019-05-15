@@ -10,6 +10,30 @@
 <head>
 <meta charset="UTF-8">
 <title>TODO LIST</title>
+<script type="text/javascript">
+	function regBtn_click() {
+		var ref = confirm("항목을 등록하시겠습니까?");
+		if (ref) {
+			self.location.href = "/todolist/reg_btn";
+		} 
+	}
+	
+	function editBtn_click() {
+		var id = event.srcElement.id;
+		var edit = confirm("항목을 수정하시겠습니까?");
+		if (edit) {
+			self.location.href = "/todolist/edit?id="+id;
+		} 
+	}
+	
+	function removeBtn_click() {
+		var id = event.srcElement.id;
+		var remove = confirm("항목을 삭제하시겠습니까?");
+		if (remove) {
+			self.location.href = "/todolist/remove?id="+id;
+		} 
+	}
+</script>
 <style>
 * {
 	background-color: #f2f2f2;
@@ -19,13 +43,21 @@ h1 {
 	text-align: center;
 }
 
-#next_btn {
-	float: right;
-	width: 150px;
-	background-color: #c00;
-	font-weight: bold;
-	text-align: center;
-	line-height: 30px;
+.regBtn {
+    width: 150px;
+    height: 40px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #7b7b7b;
+    background: #fff;
+    border: #555 solid 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.regBtn:hover {
+	color: #fff;
+	background: #7b7b7b;
 }
 
 a {
@@ -54,7 +86,6 @@ a {
     border: #c00 solid 1px;
     transition-duration: 0.4s;
     cursor: pointer;
-    display: inline-block;
     float: right;
 }
 
@@ -118,15 +149,14 @@ a {
 </head>
 <body>
 	<h1>MY TODO LIST</h1>
-	<div id=next_btn>
-		<a href="<%=path%>/reg_btn">새로운 TODO 등록</a>
-	</div>
+	
+	<input type="button" class="regBtn" value="새로운 TODO 등록" onclick="regBtn_click();">
 
 	<div class=list>
 		<div class=list_title>TODO</div>
 		<c:forEach items="${todoList }" var="todolist">
 			<div class="list_content">
-				<input type="checkbox" class="checkbox"><input type="button" class="btn" value="X" id="remove_btn"><input type="button" class="btn" value="edit" id="edit_btn"><br> 
+				<input type="checkbox" class="checkbox"><input type="button" class="btn" id="${todolist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${todolist.id }" value="edit" onclick="editBtn_click();"><br> 
 				<span class=content_main>${todolist.title }</span>
 				<span class=content_content>${todolist.content }</span> 
 				<span class=content_sub>우선순위:${todolist.sequence } 마감기한:${todolist.limitdate } </span>
@@ -138,10 +168,10 @@ a {
 		<div class=list_title>DONE</div>
 		<c:forEach items="${doneList }" var="donelist">
 			<div class="list_content">
-				<input type="checkbox" class="checkbox"><input type="button" class="btn" value="X" id="remove_btn"><input type="button" class="btn" value="edit" id="edit_btn"><br> <span class=content_main>${donelist.title }</span>
-				<span class=content_content>${donelist.content }</span> <span
-					class=content_sub>우선순위:${donelist.sequence }
-					마감기한:${donelist.limitdate }</span>
+				<input type="checkbox" class="checkbox"><input type="button" class="btn" id="${donelist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${donelist.id }" value="edit" onclick="editBtn_click();"><br> 
+				<span class=content_main>${donelist.title }</span>
+				<span class=content_content>${donelist.content }</span> 
+				<span class=content_sub>우선순위:${donelist.sequence } 마감기한:${donelist.limitdate }</span>
 			</div>
 		</c:forEach>
 	</div>

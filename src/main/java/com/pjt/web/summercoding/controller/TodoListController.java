@@ -1,6 +1,6 @@
 package com.pjt.web.summercoding.controller;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -23,27 +23,37 @@ public class TodoListController {
 	TodoListService todoListService;
 
 	@GetMapping(path="/list")
-	public String list(ModelMap model) {
+	public String list(ModelMap model) throws Exception {
+		System.out.println("*** TodoListController:list");
 		List<TodoList> todoList = todoListService.getTodoLists();
 		List<TodoList> doneList = todoListService.getDoneLists();
-
 		model.addAttribute("todoList", todoList);
 		model.addAttribute("doneList", doneList);
 				
 		return "todo_list";
 	}
 	
+	@RequestMapping("/reg_btn")
+	public String reg_btn() {
+		System.out.println("*** TodoListController:reg_btn()");
+		return "todo_reg";
+	}
+	
 	@PostMapping(path="/register")
 	public String register(@ModelAttribute TodoList todoList,
-							HttpServletRequest request) {
-		
+							HttpServletRequest request) throws Exception {
+		System.out.println("*** TodoListController:register");
 		todoListService.addTodoList(todoList);
 		
 		return "redirect:list";
 	}
 	
-	@RequestMapping("/reg_btn")
-	public String reg_btn() {
-		return "todo_reg";
+	@RequestMapping("/remove")
+	public String remove(HttpServletRequest request) throws Exception {
+		System.out.println("*** TodoListController:remove");
+		String id = request.getParameter("id");
+		todoListService.removeTodoList(Long.parseLong(id));
+		
+		return "redirect:list";
 	}
 }

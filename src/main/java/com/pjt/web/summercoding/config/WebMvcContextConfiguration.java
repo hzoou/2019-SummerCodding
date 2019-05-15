@@ -28,7 +28,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
    
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
-    		System.out.println("addViewControllers 호출 ");
+    	System.out.println("*** WebMvcContextConfiguration:addViewControllers");
         registry.addViewController("/").setViewName("main");
     }
     

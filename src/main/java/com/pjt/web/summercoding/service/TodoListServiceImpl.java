@@ -15,24 +15,38 @@ public class TodoListServiceImpl implements TodoListService {
 	TodoListDao todolistDao;
 
 	@Override
-	public List<TodoList> getTodoLists() {
+	public List<TodoList> getTodoLists() throws Exception {
+		System.out.println("*** TodoListServiceImpl:getTodoLists");
 		List<TodoList> list = todolistDao.selectTodo();
+		
 		return list;
 	}
 	
 	@Override
-	public List<TodoList> getDoneLists() {
+	public List<TodoList> getDoneLists() throws Exception {
+		System.out.println("*** TodoListServiceImpl:getDoneLists()");
 		List<TodoList> list = todolistDao.selectDone();
+		
 		return list;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public TodoList addTodoList(TodoList todoList) {
+	public TodoList addTodoList(TodoList todoList) throws Exception {
+		System.out.println("*** TodoListServiceImpl:addTodoList()");
 		Long id = todolistDao.insert(todoList);
 		todoList.setId(id);
 		todoList.setType("TODO");
 		
 		return todoList;
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public int removeTodoList(Long id) throws Exception {
+		System.out.println("*** TodoListServiceImpl:removeTodoList()");
+		int delCount = todolistDao.remove(id);
+		return delCount;
+		
 	}
 }
