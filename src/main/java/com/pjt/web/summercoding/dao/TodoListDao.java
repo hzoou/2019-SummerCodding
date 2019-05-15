@@ -25,7 +25,7 @@ public class TodoListDao {
 	private RowMapper<TodoList> rowMapper = BeanPropertyRowMapper.newInstance(TodoList.class);
 	
 	public TodoListDao(DataSource dataSource) {
-		System.out.println("*** TodoListDao:TodoListDao");
+		System.out.println("*** TodoListDao:TodoListDao()");
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource)
                 .withTableName("todo")
@@ -34,23 +34,42 @@ public class TodoListDao {
 	
 	public List<TodoList> selectTodo() {
 		System.out.println("*** TodoListDao:selectTodo()");
+		
 		return jdbc.query(SELECT_TODO, rowMapper);
 	}
 	
 	public List<TodoList> selectDone() {
 		System.out.println("*** TodoListDao:selectDone()");
+		
 		return jdbc.query(SELECT_DONE, rowMapper);
 	}
 	
-	public Long insert(TodoList todoList) {
-		System.out.println("*** TodoListDao:insert()");
-		SqlParameterSource params = new BeanPropertySqlParameterSource(todoList);
-		return insertAction.executeAndReturnKey(params).longValue();
+	public TodoList selectById(int id) {
+		System.out.println("*** TodoListDao:selectById()");
+		Map<String, ?> params = Collections.singletonMap("id", id);
+		
+		return jdbc.queryForObject(SELECT_BY_ID, params, rowMapper);
 	}
 	
-	public int remove(Long id) {
+	public int insert(TodoList todoList) {
+		System.out.println("*** TodoListDao:insert()");
+		SqlParameterSource params = new BeanPropertySqlParameterSource(todoList);
+		
+		return insertAction.execute(params);
+	}
+	
+	public int edit(TodoList todoList) {
+		System.out.println("*** TodoListDao:edit()");
+		System.out.println(todoList);
+		SqlParameterSource params = new BeanPropertySqlParameterSource(todoList);
+		
+		return jdbc.update(EDIT, params);
+	}
+	
+	public int remove(int id) {
 		System.out.println("*** TodoListDao:remove()");
 		Map<String, ?> params = Collections.singletonMap("id", id);
+		
 		return jdbc.update(REMOVE, params);
 	}
 }

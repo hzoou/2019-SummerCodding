@@ -11,10 +11,20 @@
 <meta charset="UTF-8">
 <title>TODO LIST</title>
 <script type="text/javascript">
+	opener.document.location.reload();
+	self.close();
+
 	function regBtn_click() {
-		var ref = confirm("항목을 등록하시겠습니까?");
-		if (ref) {
-			self.location.href = "/todolist/reg_btn";
+		var reg = confirm("항목을 등록하시겠습니까?");
+		if (reg) {
+			var width = 520;
+		    var height = 500;
+		    var top = (screen.availHeight - height) / 2;
+		    var left = (screen.availWidth - width) / 2;
+		    var strFeature;
+		    strFeature = 'height=' + height + ',width=' + width + ',menubar=no,toolbar=no,location=no,resizable=no,status=no,scrollbars=yes,top=' + top + ',left=' + left
+
+			window.open("/todolist/reg_btn", "a", strFeature);
 		} 
 	}
 	
@@ -22,7 +32,16 @@
 		var id = event.srcElement.id;
 		var edit = confirm("항목을 수정하시겠습니까?");
 		if (edit) {
-			self.location.href = "/todolist/edit?id="+id;
+			var url = "/todolist/edit_btn?id="+id;
+			
+			var width = 520;
+		    var height = 500;
+		    var top = (screen.availHeight - height) / 2;
+		    var left = (screen.availWidth - width) / 2;
+		    var strFeature;
+		    strFeature = 'height=' + height + ',width=' + width + ',menubar=no,toolbar=no,location=no,resizable=no,status=no,scrollbars=yes,top=' + top + ',left=' + left
+
+			window.open(url, "a", strFeature);
 		} 
 	}
 	

@@ -16,7 +16,7 @@ public class TodoListServiceImpl implements TodoListService {
 
 	@Override
 	public List<TodoList> getTodoLists() throws Exception {
-		System.out.println("*** TodoListServiceImpl:getTodoLists");
+		System.out.println("*** TodoListServiceImpl:getTodoLists()");
 		List<TodoList> list = todolistDao.selectTodo();
 		
 		return list;
@@ -29,24 +29,37 @@ public class TodoListServiceImpl implements TodoListService {
 		
 		return list;
 	}
+	
+	@Override
+	public TodoList getTodoListById(int id) throws Exception {
+		System.out.println("*** TodoListServiceImpl:getTodoListById()");
+
+		return todolistDao.selectById(id);
+	}
 
 	@Override
 	@Transactional(readOnly=false)
 	public TodoList addTodoList(TodoList todoList) throws Exception {
 		System.out.println("*** TodoListServiceImpl:addTodoList()");
-		Long id = todolistDao.insert(todoList);
+		int id = todolistDao.insert(todoList);
 		todoList.setId(id);
-		todoList.setType("TODO");
 		
 		return todoList;
+	}
+	
+	@Override
+	@Transactional(readOnly=false)
+	public void editTodoList(TodoList todoList) throws Exception {
+		System.out.println("*** TodoListServiceImpl:editTodoList()");
+		System.out.println(todoList);
+		todolistDao.edit(todoList);
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public int removeTodoList(Long id) throws Exception {
+	public void removeTodoList(int id) throws Exception {
 		System.out.println("*** TodoListServiceImpl:removeTodoList()");
-		int delCount = todolistDao.remove(id);
-		return delCount;
-		
+		todolistDao.remove(id);
 	}
+	
 }

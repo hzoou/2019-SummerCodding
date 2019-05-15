@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="register" method="POST">
-			<input type="text" name="title" placeholder="제목" maxlength="24">
-			<input type="text" name="content" placeholder="내용" maxlength="7">
+<form action="edit" method="POST">
+			<input type="text" name="id" value="${list.id }">
+			<input type="text" name="title" value="${list.title }" maxlength="24">
+			<input type="text" name="content" value="${list.content }" maxlength="7">
 			<br><b>우선순위를 선택하세요</b>
 			<div class="seq">
 			<input type="radio" name="sequence" checked="checked" value="1" /> <label for="1">1순위</label>

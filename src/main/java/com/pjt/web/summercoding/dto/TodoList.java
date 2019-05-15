@@ -3,17 +3,17 @@ package com.pjt.web.summercoding.dto;
 import java.util.Date;
 
 public class TodoList {
-	private Long id;
+	private int id;
 	private String title;
 	private String content;
 	private String type;
 	private int sequence;
 	private Date limitdate;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {
