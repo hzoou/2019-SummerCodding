@@ -25,10 +25,12 @@ public class TodoListApiController {
 	@GetMapping
 	public Map<String, Object> list() {
 		
-		List<TodoList> list = todoListService.getTodoLists();
+		List<TodoList> todoList = todoListService.getTodoLists();
+		List<TodoList> doneList = todoListService.getDoneLists();
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("list", list);
+		map.put("todoList", todoList);
+		map.put("doneList", doneList);
 		
 		return map;
 	}

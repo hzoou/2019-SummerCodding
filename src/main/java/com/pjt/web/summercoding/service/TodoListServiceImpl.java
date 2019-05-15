@@ -16,7 +16,13 @@ public class TodoListServiceImpl implements TodoListService {
 
 	@Override
 	public List<TodoList> getTodoLists() {
-		List<TodoList> list = todolistDao.selectAll();
+		List<TodoList> list = todolistDao.selectTodo();
+		return list;
+	}
+	
+	@Override
+	public List<TodoList> getDoneLists() {
+		List<TodoList> list = todolistDao.selectDone();
 		return list;
 	}
 

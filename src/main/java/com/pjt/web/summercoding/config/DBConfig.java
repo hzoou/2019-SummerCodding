@@ -30,7 +30,6 @@ public class DBConfig implements TransactionManagementConfigurer {
 
 	@Override
 	public PlatformTransactionManager annotationDrivenTransactionManager() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

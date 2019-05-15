@@ -1,6 +1,8 @@
 package com.pjt.web.summercoding.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,13 +20,15 @@ import com.pjt.web.summercoding.service.TodoListService;
 @Controller
 public class TodoListController {
 	@Autowired
-	TodoListService todolistService;
+	TodoListService todoListService;
 
 	@GetMapping(path="/list")
 	public String list(ModelMap model) {
-		List<TodoList> list = todolistService.getTodoLists();
-		
-		model.addAttribute("list", list);
+		List<TodoList> todoList = todoListService.getTodoLists();
+		List<TodoList> doneList = todoListService.getDoneLists();
+
+		model.addAttribute("todoList", todoList);
+		model.addAttribute("doneList", doneList);
 				
 		return "todo_list";
 	}
@@ -33,7 +37,7 @@ public class TodoListController {
 	public String register(@ModelAttribute TodoList todoList,
 							HttpServletRequest request) {
 		
-		todolistService.addTodoList(todoList);
+		todoListService.addTodoList(todoList);
 		
 		return "redirect:list";
 	}

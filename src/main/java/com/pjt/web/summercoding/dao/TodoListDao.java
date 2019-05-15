@@ -29,8 +29,12 @@ public class TodoListDao {
                 .usingGeneratedKeyColumns("id");
 	}
 	
-	public List<TodoList> selectAll() {
-		return jdbc.query(SELECT_ALL, rowMapper);
+	public List<TodoList> selectTodo() {
+		return jdbc.query(SELECT_TODO, rowMapper);
+	}
+	
+	public List<TodoList> selectDone() {
+		return jdbc.query(SELECT_DONE, rowMapper);
 	}
 	
 	public Long insert(TodoList todoList) {

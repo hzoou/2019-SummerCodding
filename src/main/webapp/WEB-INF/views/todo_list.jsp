@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
@@ -40,15 +41,37 @@ a {
 	float: left;
 }
 
+.checkbox {
+	margin-left: 0px;
+	cursor: pointer;
+}
+
+.btn {
+    margin-right: 5px;
+    font-size: 12px;
+    color: #c00;
+    background-color: #fff;
+    border: #c00 solid 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+}
+
+.btn:hover {
+	background-color: #c00;
+  	color: #fff;
+}
+
 .list_title {
 	height: 65px;
 	padding: 0px 0px 0px 20px;
-	background: #747474;
+	background: #c00;
 	color: #fff;
 	font-size: 23px;
 	font-weight: bold;
 	line-height: 65px;
-	width: 300px;
+	width: 302px;
 	margin: 15px;
 }
 
@@ -99,21 +122,29 @@ a {
 		<a href="<%=path%>/reg_btn">새로운 TODO 등록</a>
 	</div>
 
-
 	<div class=list>
 		<div class=list_title>TODO</div>
-		<c:forEach items="${list }" var="todolist">
+		<c:forEach items="${todoList }" var="todolist">
 			<div class="list_content">
-				<input type="checkbox"><br> <span class=content_main>${todolist.title }</span>
-				<span class=content_content>${todolist.content }</span> <span
-					class=content_sub>우선순위:${todolist.sequence }
-					마감기한:${todolist.limitdate }</span>
+				<input type="checkbox" class="checkbox"><input type="button" class="btn" value="X" id="remove_btn"><input type="button" class="btn" value="edit" id="edit_btn"><br> 
+				<span class=content_main>${todolist.title }</span>
+				<span class=content_content>${todolist.content }</span> 
+				<span class=content_sub>우선순위:${todolist.sequence } 마감기한:${todolist.limitdate } </span>
 			</div>
 		</c:forEach>
 	</div>
+
 	<div class=list>
 		<div class=list_title>DONE</div>
+		<c:forEach items="${doneList }" var="donelist">
+			<div class="list_content">
+				<input type="checkbox" class="checkbox"><input type="button" class="btn" value="X" id="remove_btn"><input type="button" class="btn" value="edit" id="edit_btn"><br> <span class=content_main>${donelist.title }</span>
+				<span class=content_content>${donelist.content }</span> <span
+					class=content_sub>우선순위:${donelist.sequence }
+					마감기한:${donelist.limitdate }</span>
+			</div>
+		</c:forEach>
 	</div>
-
+	
 </body>
 </html>
