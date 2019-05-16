@@ -11,4 +11,6 @@ public interface TodoListService {
 	public TodoList addTodoList(TodoList todoList) throws Exception;
 	public void editTodoList(TodoList todoList) throws Exception;
 	public void removeTodoList(int id) throws Exception;
+	public void completeTodoList(int id) throws Exception;
+	public void cancelTodoList(int id) throws Exception;
 }

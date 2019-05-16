@@ -61,5 +61,17 @@ public class TodoListServiceImpl implements TodoListService {
 		System.out.println("*** TodoListServiceImpl:removeTodoList()");
 		todolistDao.remove(id);
 	}
+
+	@Override
+	public void completeTodoList(int id) throws Exception {
+		System.out.println("*** TodoListServiceImpl:completeTodoList()");
+		todolistDao.complete(id);	
+	}
+
+	@Override
+	public void cancelTodoList(int id) throws Exception {
+		System.out.println("*** TodoListServiceImpl:cancelTodoList()");
+		todolistDao.cancel(id);	
+	}
 	
 }

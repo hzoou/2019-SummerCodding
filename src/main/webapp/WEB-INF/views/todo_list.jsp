@@ -15,7 +15,7 @@
 	self.close();
 
 	function regBtn_click() {
-		var reg = confirm("항목을 등록하시겠습니까?");
+		var reg = confirm('할일을 등록하시겠습니까?');
 		if (reg) {
 			var width = 520;
 		    var height = 300;
@@ -30,7 +30,7 @@
 	
 	function editBtn_click() {
 		var id = event.srcElement.id;
-		var edit = confirm("항목을 수정하시겠습니까?");
+		var edit = confirm('항목을 수정하시겠습니까?');
 		if (edit) {
 			var url = "/todolist/edit_btn?id="+id;
 			
@@ -47,11 +47,29 @@
 	
 	function removeBtn_click() {
 		var id = event.srcElement.id;
-		var remove = confirm("항목을 삭제하시겠습니까?");
+		var remove = confirm('항목을 삭제하시겠습니까?');
 		if (remove) {
 			self.location.href = "/todolist/remove?id="+id;
 		} 
 	}
+	
+	
+	function check_click() {
+		var id = event.srcElement.id;
+		var type = document.getElementById(id).value
+		if (type == 'todo') {
+			var complete = confirm('항목을 완료하셨습니까?');
+			if (complete) {
+				self.location.href = "/todolist/complete?id="+id;
+			}
+		} else {
+			var cancel = confirm('항목에 대한 완료를 취소하시겠습니까?');
+			if (cancel) {
+				self.location.href = "/todolist/cancel?id="+id;
+			}
+		}
+	}
+	
 </script>
 <style>
 * {
@@ -175,7 +193,7 @@ a {
 		<div class=list_title>TODO</div>
 		<c:forEach items="${todoList }" var="todolist">
 			<div class="list_content">
-				<input type="checkbox" class="checkbox"><input type="button" class="btn" id="${todolist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${todolist.id }" value="edit" onclick="editBtn_click();"><br> 
+				<input type="checkbox" class="checkbox" value="todo" id="${todolist.id }" onclick="check_click();"><input type="button" class="btn" id="${todolist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${todolist.id }" value="edit" onclick="editBtn_click();"><br> 
 				<span class=content_main>${todolist.title }</span>
 				<span class=content_content>${todolist.content }</span> 
 				<span class=content_sub>우선순위:${todolist.sequence } 마감기한:${todolist.limitdate } </span>
@@ -187,7 +205,7 @@ a {
 		<div class=list_title>DONE</div>
 		<c:forEach items="${doneList }" var="donelist">
 			<div class="list_content">
-				<input type="checkbox" class="checkbox"><input type="button" class="btn" id="${donelist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${donelist.id }" value="edit" onclick="editBtn_click();"><br> 
+				<input type="checkbox" class="checkbox" value="done" id="${donelist.id }" checked="checked" onclick="check_click();"><input type="button" class="btn" id="${donelist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${donelist.id }" value="edit" onclick="editBtn_click();"><br> 
 				<span class=content_main>${donelist.title }</span>
 				<span class=content_content>${donelist.content }</span> 
 				<span class=content_sub>우선순위:${donelist.sequence } 마감기한:${donelist.limitdate }</span>

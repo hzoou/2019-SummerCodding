@@ -71,4 +71,22 @@ public class TodoListController {
 		
 		return "redirect:list";
 	}
+	
+	@RequestMapping("/complete")
+	public String complete(HttpServletRequest request) throws Exception {
+		System.out.println("*** TodoListController:complete()");
+		String id = request.getParameter("id");
+		todoListService.completeTodoList(Integer.parseInt(id));
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/cancel")
+	public String cancel(HttpServletRequest request) throws Exception {
+		System.out.println("*** TodoListController:cancel()");
+		String id = request.getParameter("id");
+		todoListService.cancelTodoList(Integer.parseInt(id));
+		
+		return "redirect:list";
+	}
 }

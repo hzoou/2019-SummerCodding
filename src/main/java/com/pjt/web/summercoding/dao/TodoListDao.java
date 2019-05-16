@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.fabric.xmlrpc.base.Params;
 import com.pjt.web.summercoding.dto.TodoList;
 
 import static com.pjt.web.summercoding.dao.TodoListDaoSqls.*;
@@ -71,5 +72,19 @@ public class TodoListDao {
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		
 		return jdbc.update(REMOVE, params);
+	}
+	
+	public int complete(int id) {
+		System.out.println("*** TodoListDao:complete()");
+		Map<String, ?> params = Collections.singletonMap("id", id);
+		
+		return jdbc.update(COMPLETE, params);
+	}
+	
+	public int cancel(int id) {
+		System.out.println("*** TodoListDao:cancel()");
+		Map<String, ?> params = Collections.singletonMap("id", id);
+		
+		return jdbc.update(CANCEL, params);
 	}
 }
