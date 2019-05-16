@@ -5,66 +5,56 @@
 <head>
 <meta charset="UTF-8">
 <title>TODO 수정</title>
-<style>
-* {
-	background-color: #fff;
-}
-h3 {
-	text-align: center;
-}
-input[type=text] {
-	width: 215px;
-}
-.id {
-	display: none;
-}
-label {
-	font-size: 15px;
-}
-.content {
-    margin-top: 40px;
-	margin-left: 70px;
-}
-.seq {
-	display: inline-block;
-}
-.footer {
-    text-align: center;
-    margin-top: 30px;
-}
-.btn {
-	font-size: 13px;
-    color: #c00;
-    background-color: #fff;
-    border: #c00 solid 1px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-.btn:hover {
-	background-color: #c00;
-  	color: #fff;
-}
-</style>
+<link type="text/css" rel="stylesheet" href="resources/popup.css">
+<script type="text/javascript">
+	function edit_click() {
+		var title = document.getElementsByName('title');
+		var content = document.getElementsByName('content');
+	
+		if (title[0].value.trim() == "") {
+			alert('제목을 입력하세요!');
+			title[0].focus();
+			return false;
+		} else if (content[0].value.trim() == "") {
+			alert('내용을 입력하세요!');
+			content[0].focus(); 
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 </head>
 <body>
 <h3>TODO 수정</h3>
-<form action="edit" method="POST">
-			<input type="text" name="id" class="id" value="${list.id }">
+<form action="edit" method="POST" onSubmit="return edit_click()">
+			<input type="text" name="id" class="id" style="display: none" value="${list.id }">
 			<div class="content">
-			<label>제목을 입력하세요 : </label> <input type="text" name="title" value="${list.title }" /> <br>
-			<label>내용을 입력하세요 : </label> <input type="text" name="content" value="${list.content }" /><br>
+			<label>제목을 입력하세요 : </label> <input type="text" name="title" value="${list.title }" maxlength="100"/> <br>
+			<label>내용을 입력하세요 : </label> <input type="text" name="content" value="${list.content }" maxlength="255"/><br>
 			<label>우선순위를 선택하세요 :</label>
-			<div class="seq">
-			<input type="radio" name="sequence" checked="checked" value="1" /> <label for="1">1순위</label>
+			<div class="seq" id="${list.sequence }">
+			<input type="radio" name="sequence" value="1" /> <label for="1">1순위</label>
 			<input type="radio" name="sequence" value="2" /> <label for="2">2순위</label>
 			<input type="radio" name="sequence" value="3" /> <label for="3">3순위</label>
 			</div> <br>
 			<label>마감기한을 선택하세요 : </label> <input type="date" name="deadline" id="datePicker" value="${list.deadline }"/>
 			</div>
 			<div class="footer">
-			<input type="submit" class="btn" value="등록">
+			<input type="submit" class="btn" value="수정">
 			<input type="reset" class="btn" value="원래대로">
 			</div>
 </form>
+
+<script type="text/javascript">
+	var seq = document.getElementsByClassName('seq')[0].id;
+	var radio = document.getElementsByName('sequence');
+	
+	for (var i = 0; i < radio.length; i++) {
+		if (radio[i].value == seq) {
+			radio[i].checked = true; 
+		}
+	}
+</script>
 </body>
 </html>

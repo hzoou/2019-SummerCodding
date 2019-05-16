@@ -1,0 +1,38 @@
+@charset "UTF-8";
+* {
+	background-color: #fff;
+}
+h3 {
+	text-align: center;
+}
+input[type=text] {
+	width: 215px;
+}
+label {
+	font-size: 15px;
+}
+.content {
+	text-align: center;
+}
+.seq {
+	display: inline-block;
+}
+input[type=date] {
+	width: 187px;
+}
+.footer {
+    text-align: center;
+    margin-top: 30px;
+}
+.btn {
+	font-size: 13px;
+    color: #c00;
+    background-color: #fff;
+    border: #c00 solid 1px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.btn:hover {
+	background-color: #c00;
+  	color: #fff;
+}

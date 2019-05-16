@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TODO LIST</title>
+<link type="text/css" rel="stylesheet" href="resources/main.css">
 <script type="text/javascript">
 	opener.document.location.reload();
 	self.close();
@@ -18,7 +19,7 @@
 		var reg = confirm('할일을 등록하시겠습니까?');
 		if (reg) {
 			var width = 520;
-		    var height = 300;
+		    var height = 275;
 		    var top = (screen.availHeight - height) / 2;
 		    var left = (screen.availWidth - width) / 2;
 		    var strFeature;
@@ -35,7 +36,7 @@
 			var url = "/todolist/edit_btn?id="+id;
 			
 			var width = 520;
-		    var height = 300;
+		    var height = 275;
 		    var top = (screen.availHeight - height) / 2;
 		    var left = (screen.availWidth - width) / 2;
 		    var strFeature;
@@ -71,160 +72,37 @@
 	}
 	
 </script>
-<style>
-* {
-	background-color: #f2f2f2;
-}
-
-h1 {
-	text-align: center;
-}
-
-.regBtn {
-    width: 150px;
-    height: 40px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #7b7b7b;
-    background: #fff;
-    border: #555 solid 1px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    display: block;
-}
-
-.regBtn:hover {
-	color: #fff;
-	background: #7b7b7b;
-}
-
-a {
-	color: #fff;
-	background: inherit;
-	display: block;
-	text-decoration: none;
-	font-size: 15px;
-}
-
-.list {
-	width: 355px;
-	float: left;
-}
-
-.checkbox {
-	margin-left: 0px;
-	cursor: pointer;
-}
-
-.btn {
-    margin-right: 5px;
-    font-size: 12px;
-    color: #c00;
-    background-color: #fff;
-    border: #c00 solid 1px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    float: right;
-}
-
-.btn:hover {
-	background-color: #c00;
-  	color: #fff;
-}
-
-.list_title {
-	height: 65px;
-	padding: 0px 0px 0px 20px;
-	background: #c00;
-	color: #fff;
-	font-size: 23px;
-	font-weight: bold;
-	line-height: 65px;
-	width: 302px;
-	margin: 15px;
-}
-
-.list_content {
-	background-color: #fff;
-	margin: 15px;
-	border: solid 1px #6d6d6d;
-	width: 300px;
-	height: 80px;
-	padding: 10px;
-}
-
-.content_main {
-	font-size: 18px;
-	font-weight: bold;
-	background: inherit;
-	text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	display: block;
-	overflow: hidden;
-	white-space: nowrap;
-	display: block;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.content_content {
-	margin: 4px 0 0 0;
-	font-size: 14px;
-	background: inherit;
-	color: #2b2b2b;
-	text-overflow: ellipsis;
-	display: block;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.content_sub {
-	font-size: 12px;
-	background: inherit;
-	color: #2b2b2b;
-}
-.deadline {
-	background: #fff;
-}
-
-.notice {
-	margin-right: 5px;
-    text-align: center;
-    display: none;
-    float: right;
-    background: #555;
-    color: #fff;
-    width: 30px;
-}
-</style>
 </head>
 <body>
-	<h1>MY TODO LIST</h1>
-	
+		<p>MY TODO LIST<br></p>
+		<div class="list">
 	<input type="button" class="regBtn" value="새로운 TODO 등록" onclick="regBtn_click();">
+</div>
 
-	<div class=list>
-		<div class=list_title>TODO</div>
+		<div class="main">
+	<div class="list">
+		<div class="list_title">TODO</div>
 		<c:forEach items="${todoList }" var="todolist">
 			<div class="list_content">
 				<input type="checkbox" class="checkbox" value="todo" id="${todolist.id }" onclick="check_click();"><input type="button" class="btn" id="${todolist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${todolist.id }" value="edit" onclick="editBtn_click();"><br> 
-				<span class=content_main>${todolist.title }</span>
-				<span class=content_content>${todolist.content }</span> 
-				<span class=content_sub>우선순위:${todolist.sequence } 마감기한:<label class="deadline">${todolist.deadline }</label> <label class="notice">마감</label> </span>
+				<span class="content_main">${todolist.title }</span>
+				<span class="content_content">${todolist.content }</span> 
+				<span class="content_sub">우선순위:${todolist.sequence } <label class="deadline">마감기한:${todolist.deadline }</label> <label class="notice">마감</label> </span>
 			</div>
 		</c:forEach>
 	</div>
 
-	<div class=list>
-		<div class=list_title>DONE</div>
+	<div class="list">
+		<div class="list_title">DONE</div>
 		<c:forEach items="${doneList }" var="donelist">
 			<div class="list_content">
 				<input type="checkbox" class="checkbox" value="done" id="${donelist.id }" checked="checked" onclick="check_click();"><input type="button" class="btn" id="${donelist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${donelist.id }" value="edit" onclick="editBtn_click();"><br> 
-				<span class=content_main>${donelist.title }</span>
-				<span class=content_content>${donelist.content }</span> 
-				<span class=content_sub>우선순위:${donelist.sequence } 마감기한:<label class="deadline">${donelist.deadline }</label> <label class="notice">마감</label> </span>
+				<span class="content_main">${donelist.title }</span>
+				<span class="content_content">${donelist.content }</span> 
+				<span class="content_sub">우선순위:${donelist.sequence } <label class="deadline">마감기한:${donelist.deadline }</label> <label class="notice">마감</label> </span>
 			</div>
 		</c:forEach>
+	</div>
 	</div>
 	
 	<script>
@@ -232,16 +110,15 @@ a {
 		var notice = document.getElementsByClassName('notice');
 		
 		for (var i = 0; i < deadline.length; i++) {
-			var deadlineDate = deadline[i].innerText;
+			var deadlineDate = deadline[i].innerText.slice(5,15);
 			var today = new Date().toISOString().slice(0, 10);
-			console.log(deadlineDate);	
-			console.log(today);
-			console.log(deadlineDate > today);
-			
-			if(deadlineDate != "" && deadlineDate < today) {
-				notice[i].style.display = 'inline';
-			}			
-			
+			if (deadlineDate != "") {
+				deadline[i].style.display = 'inline';
+				
+				if (deadlineDate < today) {
+					notice[i].style.display = 'inline';
+				}
+			}		
 		}
 	</script>
 </body>
