@@ -15,9 +15,6 @@ h3 {
 input[type=text] {
 	width: 215px;
 }
-.id {
-	display: none;
-}
 label {
 	font-size: 15px;
 }
@@ -27,6 +24,9 @@ label {
 }
 .seq {
 	display: inline-block;
+}
+.date {
+	margin-left: -20px;
 }
 .footer {
     text-align: center;
@@ -57,10 +57,11 @@ label {
 			<input type="radio" name="sequence" checked="checked" value="1" /> <label for="1">1순위</label>
 			<input type="radio" name="sequence" value="2" /> <label for="2">2순위</label>
 			<input type="radio" name="sequence" value="3" /> <label for="3">3순위</label>
-			</div>
+			</div> <br>
+			<label>마감기한을 선택하세요 : </label> <input type="date" name="deadline" id="datePicker"/>
 			</div>
 			<div class="footer">
-			<input type="submit" class="btn" value="등록">
+			<input type="submit" class="btn" value="등록" onclick="reg_click();">
 			<input type="reset" class="btn" value="내용지우기">
 			</div>
 </form>

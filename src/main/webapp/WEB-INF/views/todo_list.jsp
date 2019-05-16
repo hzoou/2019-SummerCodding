@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	opener.document.location.reload();
 	self.close();
-
+	
 	function regBtn_click() {
 		var reg = confirm('할일을 등록하시겠습니까?');
 		if (reg) {
@@ -90,6 +90,7 @@ h1 {
     border: #555 solid 1px;
     transition-duration: 0.4s;
     cursor: pointer;
+    display: block;
 }
 
 .regBtn:hover {
@@ -182,6 +183,19 @@ a {
 	background: inherit;
 	color: #2b2b2b;
 }
+.deadline {
+	background: #fff;
+}
+
+.notice {
+	margin-right: 5px;
+    text-align: center;
+    display: none;
+    float: right;
+    background: #555;
+    color: #fff;
+    width: 30px;
+}
 </style>
 </head>
 <body>
@@ -196,7 +210,7 @@ a {
 				<input type="checkbox" class="checkbox" value="todo" id="${todolist.id }" onclick="check_click();"><input type="button" class="btn" id="${todolist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${todolist.id }" value="edit" onclick="editBtn_click();"><br> 
 				<span class=content_main>${todolist.title }</span>
 				<span class=content_content>${todolist.content }</span> 
-				<span class=content_sub>우선순위:${todolist.sequence } 마감기한:${todolist.limitdate } </span>
+				<span class=content_sub>우선순위:${todolist.sequence } 마감기한:<label class="deadline">${todolist.deadline }</label> <label class="notice">마감</label> </span>
 			</div>
 		</c:forEach>
 	</div>
@@ -208,10 +222,27 @@ a {
 				<input type="checkbox" class="checkbox" value="done" id="${donelist.id }" checked="checked" onclick="check_click();"><input type="button" class="btn" id="${donelist.id }" value="X" onclick="removeBtn_click();"><input type="button" class="btn" id="${donelist.id }" value="edit" onclick="editBtn_click();"><br> 
 				<span class=content_main>${donelist.title }</span>
 				<span class=content_content>${donelist.content }</span> 
-				<span class=content_sub>우선순위:${donelist.sequence } 마감기한:${donelist.limitdate }</span>
+				<span class=content_sub>우선순위:${donelist.sequence } 마감기한:<label class="deadline">${donelist.deadline }</label> <label class="notice">마감</label> </span>
 			</div>
 		</c:forEach>
 	</div>
 	
+	<script>
+		var deadline = document.getElementsByClassName('deadline');
+		var notice = document.getElementsByClassName('notice');
+		
+		for (var i = 0; i < deadline.length; i++) {
+			var deadlineDate = deadline[i].innerText;
+			var today = new Date().toISOString().slice(0, 10);
+			console.log(deadlineDate);	
+			console.log(today);
+			console.log(deadlineDate > today);
+			
+			if(deadlineDate != "" && deadlineDate < today) {
+				notice[i].style.display = 'inline';
+			}			
+			
+		}
+	</script>
 </body>
 </html>

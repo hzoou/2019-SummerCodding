@@ -8,7 +8,7 @@ public class TodoList {
 	private String content;
 	private String type;
 	private int sequence;
-	private Date limitdate;
+	private String deadline;
 	
 	public int getId() {
 		return id;
@@ -40,16 +40,16 @@ public class TodoList {
 	public void setSequence(int sequence) {
 		this.sequence = sequence;
 	}
-	public Date getLimitdate() {
-		return limitdate;
+	public String getDeadline() {
+		return deadline;
 	}
-	public void setLimitdate(Date limitdate) {
-		this.limitdate = limitdate;
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
 	}
 	
 	@Override
 	public String toString() {
 		return "TodoList [id=" + id + ", title=" + title + ", content=" + content + ", type=" + type + ", sequence="
-				+ sequence + ", limitdate=" + limitdate + "]";
+				+ sequence + ", deadline=" + deadline + "]";
 	}
 }

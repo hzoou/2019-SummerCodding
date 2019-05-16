@@ -58,7 +58,8 @@ label {
 			<input type="radio" name="sequence" checked="checked" value="1" /> <label for="1">1순위</label>
 			<input type="radio" name="sequence" value="2" /> <label for="2">2순위</label>
 			<input type="radio" name="sequence" value="3" /> <label for="3">3순위</label>
-			</div>
+			</div> <br>
+			<label>마감기한을 선택하세요 : </label> <input type="date" name="deadline" id="datePicker" value="${list.deadline }"/>
 			</div>
 			<div class="footer">
 			<input type="submit" class="btn" value="등록">

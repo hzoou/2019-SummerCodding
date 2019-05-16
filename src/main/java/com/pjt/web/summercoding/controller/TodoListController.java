@@ -41,6 +41,7 @@ public class TodoListController {
 	@PostMapping(path="/register")
 	public String register(@ModelAttribute TodoList todoList, HttpServletRequest request) throws Exception {
 		System.out.println("*** TodoListController:register()");
+	
 		todoListService.addTodoList(todoList);
 		
 		return "redirect:list";
