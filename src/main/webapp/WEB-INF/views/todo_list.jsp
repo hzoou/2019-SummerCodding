@@ -20,7 +20,7 @@
 		var reg = confirm('할일을 등록하시겠습니까?');
 		if (reg) {
 			var width = 520;
-		    var height = 290;
+		    var height = 300;
 		    var top = (screen.availHeight - height) / 2;
 		    var left = (screen.availWidth - width) / 2;
 		    var strFeature;
@@ -38,7 +38,7 @@
 			var url = "/todolist/edit_btn?id="+id;
 			
 			var width = 520;
-		    var height = 290;
+		    var height = 300;
 		    var top = (screen.availHeight - height) / 2;
 		    var left = (screen.availWidth - width) / 2;
 		    var strFeature;
