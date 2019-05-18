@@ -117,7 +117,7 @@ Ubuntu에서 실행하기
  
 3. Build project
  ````
- cd <Download_file_path>/2019-SummerCodding
+ cd /<Download_file_path>/2019-SummerCodding
  mvn package
  ````
  
