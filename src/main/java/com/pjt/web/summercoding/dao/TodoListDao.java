@@ -24,7 +24,7 @@ public class TodoListDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private SimpleJdbcInsert insertAction;
 	private RowMapper<TodoList> rowMapper = BeanPropertyRowMapper.newInstance(TodoList.class);
-	
+
 	public TodoListDao(DataSource dataSource) {
 		System.out.println("*** TodoListDao:TodoListDao()");
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -33,18 +33,34 @@ public class TodoListDao {
                 .usingGeneratedKeyColumns("id");
 	}
 	
+	/**
+	 * TODO항목에 대한 전체 List 조회 쿼리 실행
+	 * 
+	 * @return List<TodoList>
+	 */
 	public List<TodoList> selectTodo() {
 		System.out.println("*** TodoListDao:selectTodo()");
 		
 		return jdbc.query(SELECT_TODO, rowMapper);
 	}
 	
+	/**
+	 * DONE항목에 대한 전체 List 조회 쿼리 실행
+	 * 
+	 * @return List<TodoList>
+	 */
 	public List<TodoList> selectDone() {
 		System.out.println("*** TodoListDao:selectDone()");
 		
 		return jdbc.query(SELECT_DONE, rowMapper);
 	}
 	
+	/**
+	 * 수정 시, 해당 item에 대한 정보 불러오기
+	 * 
+	 * @param id item Id
+	 * @return TodoList
+	 */
 	public TodoList selectById(int id) {
 		System.out.println("*** TodoListDao:selectById()");
 		Map<String, ?> params = Collections.singletonMap("id", id);
@@ -52,6 +68,13 @@ public class TodoListDao {
 		return jdbc.queryForObject(SELECT_BY_ID, params, rowMapper);
 	}
 	
+	/**
+	 * 데이터 등록
+	 * 
+	 * @param todoList TodoList
+	 * @return 1 - 성공 / 0 - 실패
+	 */
+	// TODO insert된 row 없을 경우(0, 실패) alert 처리 필요
 	public int insert(TodoList todoList) {
 		System.out.println("*** TodoListDao:insert()");
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todoList);
@@ -59,6 +82,13 @@ public class TodoListDao {
 		return insertAction.execute(params);
 	}
 	
+	/**
+	 * 데이터 수정
+	 * 
+	 * @param todoList TodoList
+	 * @return 1 - 성공 / 0 - 실패
+	 */
+	// TODO update된 row 없을 경우(0, 실패) alert 처리 필요
 	public int edit(TodoList todoList) {
 		System.out.println("*** TodoListDao:edit()");
 		System.out.println(todoList);
@@ -67,6 +97,13 @@ public class TodoListDao {
 		return jdbc.update(EDIT, params);
 	}
 	
+	/**
+	 * 데이터 삭제
+	 * 
+	 * @param id item Id
+	 * @return 1 - 성공 / 0 - 실패
+	 */
+	// TODO remove된 row 없을 경우(0, 실패) alert 처리 필요
 	public int remove(int id) {
 		System.out.println("*** TodoListDao:remove()");
 		Map<String, ?> params = Collections.singletonMap("id", id);
@@ -74,6 +111,13 @@ public class TodoListDao {
 		return jdbc.update(REMOVE, params);
 	}
 	
+	/**
+	 * 데이터 완료 처리 (todo -> done)
+	 * 
+	 * @param id item Id
+	 * @return 1 - 성공 / 0 - 실패
+	 */
+	// TODO update된 row 없을 경우(0, 실패) alert 처리 필요
 	public int complete(int id) {
 		System.out.println("*** TodoListDao:complete()");
 		Map<String, ?> params = Collections.singletonMap("id", id);
@@ -81,6 +125,13 @@ public class TodoListDao {
 		return jdbc.update(COMPLETE, params);
 	}
 	
+	/**
+	 * 데이터 완료 취소 처리 (done -> todo)
+	 * 
+	 * @param id item Id
+	 * @return 1 - 성공 / 0 - 실패
+	 */
+	// TODO update된 row 없을 경우(0, 실패) alert 처리 필요
 	public int cancel(int id) {
 		System.out.println("*** TodoListDao:cancel()");
 		Map<String, ?> params = Collections.singletonMap("id", id);

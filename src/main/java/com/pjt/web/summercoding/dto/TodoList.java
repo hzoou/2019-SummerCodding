@@ -1,14 +1,18 @@
 package com.pjt.web.summercoding.dto;
 
-import java.util.Date;
-
+/**
+ * DTO 객체
+ * 
+ * @author hzoou
+ *
+ */
 public class TodoList {
-	private int id;
-	private String title;
-	private String content;
-	private String type;
-	private int sequence;
-	private String deadline;
+	private int id; // 필수, Auto Increment
+	private String title; // 필수
+	private String content; // 필수
+	private String type; // 필수
+	private int sequence; // 필수
+	private String deadline; // optional
 	
 	public int getId() {
 		return id;

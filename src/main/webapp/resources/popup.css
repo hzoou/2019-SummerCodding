@@ -5,14 +5,20 @@
 h3 {
 	text-align: center;
 }
+.content {
+	text-align: center;
+	list-style: none;
+}
 input[type=text] {
 	width: 215px;
 }
+#content {
+	width: 213px;
+	height: 60px;	
+	resize: none;
+}
 label {
 	font-size: 15px;
-}
-.content {
-	text-align: center;
 }
 .seq {
 	display: inline-block;

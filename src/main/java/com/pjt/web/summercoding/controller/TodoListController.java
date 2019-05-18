@@ -20,6 +20,13 @@ public class TodoListController {
 	@Autowired
 	TodoListService todoListService;
 
+	/**
+	 * 리스트 조회
+	 * 
+	 * @param model ModelMap(todoList, doneList)
+	 * @return "todo_list" // call todo_list.jsp
+	 * @throws Exception 
+	 */
 	@GetMapping(path="/list")
 	public String list(ModelMap model) throws Exception {
 		System.out.println("*** TodoListController:list()");
@@ -31,6 +38,11 @@ public class TodoListController {
 		return "todo_list";
 	}
 	
+	/**
+	 * 등록버튼 클릭
+	 * 
+	 * @return "todo_reg" // call todo_reg.jsp
+	 */
 	@RequestMapping("/reg_btn")
 	public String reg_btn() {
 		System.out.println("*** TodoListController:reg_btn()");
@@ -38,8 +50,15 @@ public class TodoListController {
 		return "todo_reg";
 	}
 	
+	/**
+	 * 데이터 등록
+	 * 
+	 * @param todoList TodoList
+	 * @return "list" // call method list()
+	 * @throws Exception
+	 */
 	@PostMapping(path="/register")
-	public String register(@ModelAttribute TodoList todoList, HttpServletRequest request) throws Exception {
+	public String register(@ModelAttribute TodoList todoList) throws Exception {
 		System.out.println("*** TodoListController:register()");
 	
 		todoListService.addTodoList(todoList);
@@ -47,6 +66,15 @@ public class TodoListController {
 		return "redirect:list";
 	}
 	
+	
+	/**
+	 * 수정버튼 클릭
+	 * 
+	 * @param model ModelMap(todoList)
+	 * @param request HttpServletRequest
+	 * @return "todo_edit" // call todo_edit.jsp
+	 * @throws Exception
+	 */
 	@GetMapping(path="/edit_btn")
 	public String edit_btn(ModelMap model, HttpServletRequest request) throws Exception {
 		System.out.println("*** TodoListController:edit_btn()");
@@ -56,6 +84,15 @@ public class TodoListController {
 		return "todo_edit";
 	}
 	
+	
+	/**
+	 * 데이터 수정
+	 * 
+	 * @param todoList TodoList
+	 * @param request HttpServletRequest
+	 * @return "list" // call method list()
+	 * @throws Exception
+	 */
 	@PostMapping(path="/edit")
 	public String edit(@ModelAttribute TodoList todoList, HttpServletRequest request) throws Exception {
 		System.out.println("*** TodoListController:edit()");
@@ -64,6 +101,14 @@ public class TodoListController {
 		return "redirect:list";
 	}
 	
+	
+	/**
+	 * 데이터 삭제
+	 * 
+	 * @param request HttpServletRequest
+	 * @return "list" // call method list()
+	 * @throws Exception
+	 */
 	@RequestMapping("/remove")
 	public String remove(HttpServletRequest request) throws Exception {
 		System.out.println("*** TodoListController:remove()");
@@ -73,6 +118,14 @@ public class TodoListController {
 		return "redirect:list";
 	}
 	
+	
+	/**
+	 * 데이터 완료 처리 (todo->done)
+	 * 
+	 * @param request HttpServletRequest
+	 * @return "list" // call method list()
+	 * @throws Exception
+	 */
 	@RequestMapping("/complete")
 	public String complete(HttpServletRequest request) throws Exception {
 		System.out.println("*** TodoListController:complete()");
@@ -82,6 +135,14 @@ public class TodoListController {
 		return "redirect:list";
 	}
 	
+	
+	/**
+	 * 데이터 완료 취소 (done->todo)
+	 * 
+	 * @param request HttpServletRequest
+	 * @return "list" // call method list()
+	 * @throws Exception
+	 */
 	@RequestMapping("/cancel")
 	public String cancel(HttpServletRequest request) throws Exception {
 		System.out.println("*** TodoListController:cancel()");
