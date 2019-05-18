@@ -15,7 +15,7 @@ public class TodoListServiceImpl implements TodoListService {
 	TodoListDao todolistDao;
 
 	@Override
-	public List<TodoList> getTodoLists() throws Exception {
+	public List<TodoList> getTodoLists() {
 		System.out.println("*** TodoListServiceImpl:getTodoLists()");
 		List<TodoList> list = todolistDao.selectTodo();
 		
@@ -23,7 +23,7 @@ public class TodoListServiceImpl implements TodoListService {
 	}
 	
 	@Override
-	public List<TodoList> getDoneLists() throws Exception {
+	public List<TodoList> getDoneLists() {
 		System.out.println("*** TodoListServiceImpl:getDoneLists()");
 		List<TodoList> list = todolistDao.selectDone();
 		
@@ -31,7 +31,7 @@ public class TodoListServiceImpl implements TodoListService {
 	}
 	
 	@Override
-	public TodoList getTodoListById(int id) throws Exception {
+	public TodoList getTodoListById(int id) {
 		System.out.println("*** TodoListServiceImpl:getTodoListById()");
 
 		return todolistDao.selectById(id);
@@ -39,7 +39,7 @@ public class TodoListServiceImpl implements TodoListService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public TodoList addTodoList(TodoList todoList) throws Exception {
+	public TodoList addTodoList(TodoList todoList) {
 		System.out.println("*** TodoListServiceImpl:addTodoList()");
 		int id = todolistDao.insert(todoList);
 		todoList.setId(id);
@@ -49,7 +49,7 @@ public class TodoListServiceImpl implements TodoListService {
 	
 	@Override
 	@Transactional(readOnly=false)
-	public void editTodoList(TodoList todoList) throws Exception {
+	public void editTodoList(TodoList todoList) {
 		System.out.println("*** TodoListServiceImpl:editTodoList()");
 		System.out.println(todoList);
 		todolistDao.edit(todoList);
@@ -57,19 +57,19 @@ public class TodoListServiceImpl implements TodoListService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public void removeTodoList(int id) throws Exception {
+	public void removeTodoList(int id) {
 		System.out.println("*** TodoListServiceImpl:removeTodoList()");
 		todolistDao.remove(id);
 	}
 
 	@Override
-	public void completeTodoList(int id) throws Exception {
+	public void completeTodoList(int id) {
 		System.out.println("*** TodoListServiceImpl:completeTodoList()");
 		todolistDao.complete(id);	
 	}
 
 	@Override
-	public void cancelTodoList(int id) throws Exception {
+	public void cancelTodoList(int id) {
 		System.out.println("*** TodoListServiceImpl:cancelTodoList()");
 		todolistDao.cancel(id);	
 	}

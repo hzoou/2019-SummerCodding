@@ -1,5 +1,6 @@
 package com.pjt.web.summercoding.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,17 +27,22 @@ public class TodoListController {
 	 * 
 	 * @param model ModelMap(todoList, doneList)
 	 * @return "todo_list" // call todo_list.jsp
-	 * @throws Exception 
+	 * @throws CustomExecption 
+	 * @throws Exception
 	 */
 	@GetMapping(path="/list")
-	public String list(ModelMap model) throws Exception {
+	public String list(ModelMap model) throws IOException {
 		System.out.println("*** TodoListController:list()");
-		List<TodoList> todoList = todoListService.getTodoLists();
-		List<TodoList> doneList = todoListService.getDoneLists();
-		model.addAttribute("todoList", todoList);
-		model.addAttribute("doneList", doneList);
-				
-		return "todo_list";
+		try {
+			List<TodoList> todoList = todoListService.getTodoLists();
+			List<TodoList> doneList = todoListService.getDoneLists();
+			model.addAttribute("todoList", todoList);
+			model.addAttribute("doneList", doneList);
+					
+			return "todo_list";
+		} catch(Exception e) {
+			throw new IOException("리스트 조회에 실패하였습니다.");
+		}
 	}
 	
 	/**
@@ -58,11 +65,14 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@PostMapping(path="/register")
-	public String register(@ModelAttribute TodoList todoList) throws Exception {
+	public String register(@ModelAttribute TodoList todoList) throws IOException {
 		System.out.println("*** TodoListController:register()");
 	
-		todoListService.addTodoList(todoList);
-		
+		try {
+			todoListService.addTodoList(todoList);
+		} catch(Exception e) {
+			throw new IOException("등록에 실패하였습니다.");
+		}
 		return "redirect:list";
 	}
 	
@@ -76,12 +86,14 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@GetMapping(path="/edit_btn")
-	public String edit_btn(ModelMap model, HttpServletRequest request) throws Exception {
+	public String edit_btn(ModelMap model, HttpServletRequest request) {
 		System.out.println("*** TodoListController:edit_btn()");
+
 		TodoList todolist = todoListService.getTodoListById(Integer.parseInt(request.getParameter("id")));
 		model.addAttribute("list", todolist);
-		
+			
 		return "todo_edit";
+
 	}
 	
 	
@@ -94,11 +106,15 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@PostMapping(path="/edit")
-	public String edit(@ModelAttribute TodoList todoList, HttpServletRequest request) throws Exception {
+	public String edit(@ModelAttribute TodoList todoList, HttpServletRequest request) throws IOException {
 		System.out.println("*** TodoListController:edit()");
-		todoListService.editTodoList(todoList);
-		
-		return "redirect:list";
+		try {
+			todoListService.editTodoList(todoList);
+			
+			return "redirect:list";
+		} catch(Exception e) {
+			throw new IOException("수정에 실패하였습니다.");
+		}
 	}
 	
 	
@@ -110,12 +126,16 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/remove")
-	public String remove(HttpServletRequest request) throws Exception {
+	public String remove(HttpServletRequest request) throws IOException {
 		System.out.println("*** TodoListController:remove()");
-		String id = request.getParameter("id");
-		todoListService.removeTodoList(Integer.parseInt(id));
-		
-		return "redirect:list";
+		try {
+			String id = request.getParameter("id");
+			todoListService.removeTodoList(Integer.parseInt(id));
+			
+			return "redirect:list";
+		} catch(Exception e) {
+			throw new IOException("삭제에 실패하였습니다.");
+		}
 	}
 	
 	
@@ -127,12 +147,16 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/complete")
-	public String complete(HttpServletRequest request) throws Exception {
+	public String complete(HttpServletRequest request) throws IOException {
 		System.out.println("*** TodoListController:complete()");
-		String id = request.getParameter("id");
-		todoListService.completeTodoList(Integer.parseInt(id));
-		
-		return "redirect:list";
+		try {
+			String id = request.getParameter("id");
+			todoListService.completeTodoList(Integer.parseInt(id));
+			
+			return "redirect:list";
+		} catch(Exception e) {
+			throw new IOException("항목 완료에 실패하였습니다.");
+		}
 	}
 	
 	
@@ -144,11 +168,15 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/cancel")
-	public String cancel(HttpServletRequest request) throws Exception {
+	public String cancel(HttpServletRequest request) throws IOException {
 		System.out.println("*** TodoListController:cancel()");
-		String id = request.getParameter("id");
-		todoListService.cancelTodoList(Integer.parseInt(id));
-		
-		return "redirect:list";
+		try {
+			String id = request.getParameter("id");
+			todoListService.cancelTodoList(Integer.parseInt(id));
+			
+			return "redirect:list";
+		} catch(Exception e) {
+			throw new IOException("항목 완료에 대한 취소를 실패하였습니다.");
+		}
 	}
 }

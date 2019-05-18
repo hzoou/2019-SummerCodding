@@ -28,7 +28,7 @@
 <body>
 	<h3>TODO 수정</h3>
 	<form action="edit" method="POST" onSubmit="return edit_click()">
-		<input type="text" name="id" style="display: none" value="${list.id }">
+		<input type="hidden" name="id" value="${list.id }">
 		<ul class="content">
 			<li>
 				<label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label> <input type="text" name="title" value="${list.title }" maxlength="100" />
