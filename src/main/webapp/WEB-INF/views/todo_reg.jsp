@@ -23,6 +23,21 @@
 			return true;
 		}
 	}
+	
+	function length_check(obj, maxlength) {
+		var str = obj.value;
+		var str_length = str.length;
+		var max_length = maxlength;
+		var change_str = "";
+		
+		if (str_length > max_length) {
+			alert('글자수는 최대 ' + max_length + '까지 가능합니다. \n초과된 내용은 자동으로 삭제됩니다.');
+			change_str = str.substring(0, max_length);
+			obj.value = change_str;
+		}
+		
+		obj.focus();
+	}
 </script>
 </head>
 <body>
@@ -30,10 +45,10 @@
 	<form action="register" method="POST" onSubmit="return reg_click()">
 			<ul class="content">
 				<li>
-					<label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label> <input type="text" name="title" placeholder="ex) 서머코딩 2차 과제" maxlength="100" />
+					<label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label> <input type="text" name="title" placeholder="ex) 서머코딩 2차 과제" onkeyup="length_check(this, 100);"/>
 				</li>
 				<li>
-					<label style="color: #c00">*&nbsp;</label><label>내용을 입력하세요 : </label> <textarea id="content" name="content" placeholder="ex) 새로운 TODO 등록 구현" maxlength="255"></textarea>
+					<label style="color: #c00">*&nbsp;</label><label>내용을 입력하세요 : </label> <textarea id="content" name="content" placeholder="ex) 새로운 TODO 등록 구현" onkeyup="length_check(this, 255);"></textarea>
 				</li>
 				<li>
 					<label style="color: #c00">*&nbsp;</label><label>우선순위를 선택하세요 :</label>
