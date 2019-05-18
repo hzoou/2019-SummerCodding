@@ -1,5 +1,6 @@
 package com.pjt.web.summercoding.dao;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -88,10 +89,8 @@ public class TodoListDao {
 	 * @param todoList TodoList
 	 * @return 1 - 성공 / 0 - 실패
 	 */
-	// TODO update된 row 없을 경우(0, 실패) alert 처리 필요
 	public int edit(TodoList todoList) {
 		System.out.println("*** TodoListDao:edit()");
-		System.out.println(todoList);
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todoList);
 		
 		return jdbc.update(EDIT, params);
@@ -103,7 +102,6 @@ public class TodoListDao {
 	 * @param id item Id
 	 * @return 1 - 성공 / 0 - 실패
 	 */
-	// TODO remove된 row 없을 경우(0, 실패) alert 처리 필요
 	public int remove(int id) {
 		System.out.println("*** TodoListDao:remove()");
 		Map<String, ?> params = Collections.singletonMap("id", id);
@@ -117,7 +115,6 @@ public class TodoListDao {
 	 * @param id item Id
 	 * @return 1 - 성공 / 0 - 실패
 	 */
-	// TODO update된 row 없을 경우(0, 실패) alert 처리 필요
 	public int complete(int id) {
 		System.out.println("*** TodoListDao:complete()");
 		Map<String, ?> params = Collections.singletonMap("id", id);
@@ -131,7 +128,6 @@ public class TodoListDao {
 	 * @param id item Id
 	 * @return 1 - 성공 / 0 - 실패
 	 */
-	// TODO update된 row 없을 경우(0, 실패) alert 처리 필요
 	public int cancel(int id) {
 		System.out.println("*** TodoListDao:cancel()");
 		Map<String, ?> params = Collections.singletonMap("id", id);

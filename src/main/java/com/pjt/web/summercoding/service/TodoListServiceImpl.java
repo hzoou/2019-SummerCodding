@@ -51,7 +51,6 @@ public class TodoListServiceImpl implements TodoListService {
 	@Transactional(readOnly=false)
 	public void editTodoList(TodoList todoList) {
 		System.out.println("*** TodoListServiceImpl:editTodoList()");
-		System.out.println(todoList);
 		todolistDao.edit(todoList);
 	}
 

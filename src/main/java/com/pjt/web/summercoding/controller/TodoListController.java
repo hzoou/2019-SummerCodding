@@ -67,7 +67,6 @@ public class TodoListController {
 	@PostMapping(path="/register")
 	public String register(@ModelAttribute TodoList todoList) throws IOException {
 		System.out.println("*** TodoListController:register()");
-	
 		try {
 			todoListService.addTodoList(todoList);
 		} catch(Exception e) {
@@ -86,14 +85,17 @@ public class TodoListController {
 	 * @throws Exception
 	 */
 	@GetMapping(path="/edit_btn")
-	public String edit_btn(ModelMap model, HttpServletRequest request) {
+	public String edit_btn(ModelMap model, HttpServletRequest request) throws IOException {
 		System.out.println("*** TodoListController:edit_btn()");
 
-		TodoList todolist = todoListService.getTodoListById(Integer.parseInt(request.getParameter("id")));
-		model.addAttribute("list", todolist);
-			
-		return "todo_edit";
-
+		try {
+			TodoList todolist = todoListService.getTodoListById(Integer.parseInt(request.getParameter("id")));
+			model.addAttribute("list", todolist);
+				
+			return "todo_edit";
+		} catch(Exception e) {
+			throw new IOException("수정하고자 하는 항목을 불러오는데 실패하였습니다.");
+		}
 	}
 	
 	
