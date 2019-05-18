@@ -7,6 +7,7 @@
 <title>TODO 수정</title>
 <link type="text/css" rel="stylesheet" href="resources/popup.css">
 <script type="text/javascript">
+	//수정 시 제목, 내용 빈 값 확인
 	function edit_click() {
 		var title = document.getElementsByName('title');
 		var content = document.getElementsByName('content');
@@ -23,6 +24,22 @@
 			return true;
 		}
 	}
+	
+	//수정 시 제목, 내용 글자수 제한
+	function length_check(obj, maxlength) {
+		var str = obj.value;
+		var str_length = str.length;
+		var max_length = maxlength;
+		var change_str = "";
+		
+		if (str_length > max_length) {
+			alert('글자수는 최대 ' + max_length + '까지 가능합니다. \n초과된 내용은 자동으로 삭제됩니다.');
+			change_str = str.substring(0, max_length);
+			obj.value = change_str;
+		}
+		
+		obj.focus();
+	}
 </script>
 </head>
 <body>
@@ -31,10 +48,10 @@
 		<input type="hidden" name="id" value="${list.id }">
 		<ul class="content">
 			<li>
-				<label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label> <input type="text" name="title" value="${list.title }" maxlength="100" />
+				<label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label> <input type="text" name="title" value="${list.title }" onkeyup="length_check(this, 100);" />
 			</li>
 			<li>
-				<label style="color: #c00">*&nbsp;</label><label>내용을 입력하세요 : </label> <textarea id="content" name="content" maxlength="255">${list.content }</textarea>
+				<label style="color: #c00">*&nbsp;</label><label>내용을 입력하세요 : </label> <textarea id="content" name="content" onkeyup="length_check(this, 255);">${list.content }</textarea>
 			</li>
 			<li>
 				<label style="color: #c00">*&nbsp;</label><label>우선순위를 선택하세요 :</label>

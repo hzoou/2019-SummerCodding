@@ -15,6 +15,7 @@
 	opener.document.location.reload();
 	self.close();
 	
+	//등록확인
 	function regBtn_click() {
 		var reg = confirm('할일을 등록하시겠습니까?');
 		if (reg) {
@@ -29,6 +30,7 @@
 		} 
 	}
 	
+	//수정확인
 	function editBtn_click() {
 		var id = event.srcElement.id;
 		var edit = confirm('항목을 수정하시겠습니까?');
@@ -46,6 +48,7 @@
 		} 
 	}
 	
+	//삭제확인
 	function removeBtn_click() {
 		var id = event.srcElement.id;
 		var remove = confirm('항목을 삭제하시겠습니까?');
@@ -54,7 +57,7 @@
 		} 
 	}
 	
-	
+	//완료 또는 취소확인
 	function check_click() {
 		var id = event.srcElement.id;
 		var type = document.getElementById(id).value
@@ -124,15 +127,17 @@
 	</div>
 	
 	<script>
+		//마감기한 확인
 		var deadline = document.getElementsByClassName('deadline');
 		var notice = document.getElementsByClassName('notice');
 		
 		for (var i = 0; i < deadline.length; i++) {
 			var deadlineDate = deadline[i].innerText.slice(5,15);
 			var today = new Date().toISOString().slice(0, 10);
+			//마감기한이 있는 경우 마감기한 표시
 			if (deadlineDate != "") {
 				deadline[i].style.display = 'inline';
-				
+				//마감기한이 지난 경우 마감알림 표시
 				if (deadlineDate < today) {
 					notice[i].style.display = 'inline';
 				}

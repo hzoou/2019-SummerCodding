@@ -7,6 +7,7 @@
 <title>TODO 등록</title>
 <link type="text/css" rel="stylesheet" href="resources/popup.css">
 <script type="text/javascript">
+	//등록 시 제목, 내용 빈 값 확인
 	function reg_click() {
 		var title = document.getElementsByName('title');
 		var content = document.getElementsByName('content');
@@ -24,6 +25,7 @@
 		}
 	}
 	
+	//등록 시 제목, 내용 글자수 제한
 	function length_check(obj, maxlength) {
 		var str = obj.value;
 		var str_length = str.length;
