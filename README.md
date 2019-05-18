@@ -123,7 +123,7 @@ Ubuntu에서 실행하기
  
 4. Copy war file to tomcat9
  ````
- cp /<Download file path>/target/todolist.war /<tomcat file path>/webapps/
+ cp /<Download file path>/<Project file name>/target/todolist.war /<tomcat file path>/webapps/
   (e.g. /home/hzoou/2019-SummerCodding/target/todolist.war /var/lib/tomcat9/webapps/)
  ````
  
