@@ -46,27 +46,24 @@
 	<h3>TODO 수정</h3>
 	<form action="edit" method="POST" onSubmit="return edit_click()">
 		<input type="hidden" name="id" value="${list.id }">
-		<table class="content">
-			<tr>
-				<td><label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label></td> 
-				<td><input type="text" name="title" value="${list.title }" onkeyup="length_check(this, 100);" /></td>
-			</tr>
-			<tr>
-				<td valign="top"><label style="color: #c00">*&nbsp;</label><label>내용을 입력하세요 : </label></td>
-				<td><textarea id="content" name="content" onkeyup="length_check(this, 255);">${list.content }</textarea></td>
-			</tr>
-			<tr>
-				<td><label style="color: #c00">*&nbsp;</label><label>우선순위를 선택하세요 :</label></td>
-				<td class="seq" id="${list.sequence }">
+		<ul class="content">
+			<li>
+				<label style="color: #c00">*&nbsp;</label><label>제목을 입력하세요 : </label> <input type="text" name="title" value="${list.title }" onkeyup="length_check(this, 100);" />
+			</li>
+			<li>
+				<label style="color: #c00">*&nbsp;</label><label>내용을 입력하세요 : </label> <textarea id="content" name="content" onkeyup="length_check(this, 255);">${list.content }</textarea>
+			</li>
+			<li>
+				<label style="color: #c00">*&nbsp;</label><label>우선순위를 선택하세요 :</label>
+				<div class="seq" id="${list.sequence }">
 					<input type="radio" name="sequence" value="1" /> <label for="1">1순위</label>
 					<input type="radio" name="sequence" value="2" /> <label for="2">2순위</label>
 					<input type="radio" name="sequence" value="3" /> <label for="3">3순위</label>
-			</tr>
-			<tr>
-				<td><label style="visibility: hidden;">*&nbsp;</label><label>마감기한을 선택하세요 : </label></td> 
-				<td><input type="date" name="deadline" id="datePicker" value="${list.deadline }" /></td>
-			</tr>
-		</table>
+				</div>
+			<li>
+				<label style="visibility: hidden;">*&nbsp;</label><label>마감기한을 선택하세요 : </label> <input type="date" name="deadline" id="datePicker" value="${list.deadline }" />
+			</li>
+		</ul>
 		<div class="footer">
 			<input type="submit" class="btn" value="수정" /> <input type="reset" class="btn" value="원래대로" />
 		</div>

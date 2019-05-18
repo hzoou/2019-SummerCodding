@@ -6,7 +6,8 @@ h3 {
 	text-align: center;
 }
 .content {
-	margin: auto;
+	text-align: center;
+	list-style: none;
 }
 input[type=text] {
 	width: 215px;
@@ -19,8 +20,11 @@ input[type=text] {
 label {
 	font-size: 15px;
 }
+.seq {
+	display: inline-block;
+}
 input[type=date] {
-	width: 214px;
+	width: 187px;
 }
 .footer {
     text-align: center;
